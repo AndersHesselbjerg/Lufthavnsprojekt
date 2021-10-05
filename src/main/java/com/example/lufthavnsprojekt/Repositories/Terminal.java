@@ -1,4 +1,7 @@
 package com.example.lufthavnsprojekt.Repositories;
 
-public class GateRepository {
+public class Terminal extends Employee {
+
+
+
 }
