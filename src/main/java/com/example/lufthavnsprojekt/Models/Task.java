@@ -1,4 +1,4 @@
 package com.example.lufthavnsprojekt.Models;
 
-public class Arrival {
+public class Task {
 }
