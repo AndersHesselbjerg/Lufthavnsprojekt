@@ -1,10 +1,14 @@
 body{
-    background-color: yellow;
+    background-color: whitesmoke;
+}
+
+.overskrift{
+    text-align: center;
 }
 
 .info-box{
-    color: aliceblue;
-    background-color: darkslateblue;
+    text-decoration-color: black;
+    background-color: whitesmoke;
     display: flex;
 }
 
