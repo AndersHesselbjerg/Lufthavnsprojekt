@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/adminView.css">
+    <meta charset="UTF-8">
+    <title>AdminView</title>
+</head>
+<body>
+
+<h3 class="overskrift"> Drift log</h3>
+<div class="info-box" style="height: 300px;overflow-y: scroll;">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Task</th>
+            <th>Expected Time</th>
+            <th>Real Time</th>
+            <th>Gate ✈</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody class="info-body" id="user-table-body">
+        </tbody>
+
+    </table>
+</div>
+<button class="update-button">Update log</button>
+<button class="print-button">Print log</button>
+</body>
+</html>
+
+<script>
+
+    let tasks = [
+        {id: 12, Desc: "Cleaning", ExpectedTime: "15 min", RealTime: "17 min", Gate: 4},
+        {id: 13, Desc: "Gas", ExpectedTime: "10 min", RealTime: "9 min", Gate: 4},
+        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4}
+    ]
+
+    function makeRows() {
+
+    const rows = tasks.map(t =>`
+        <tr>
+            <td>${t.id}</td>
+            <td>${t.Desc}</td>
+            <td>${t.ExpectedTime}</td>
+            <td>${t.RealTime}</td>
+            <td>${t.Gate}</td>
+            <td><a data-id-delete="${t.id}" href="#">Delete task</a></td>
+        </tr>
+            `)
+    document.getElementById("user-table-body").innerHTML = rows.join("")
+    }
+    makeRows()
+
+    const yellowMouseover = document.getElementById("midterHeader")
+
+    yellowMouseover.onmouseover = function(event){
+        this.event.target.style.color = 'yellow';
+    }
+
+    function handler(){
+        document.getElementById("user-table-body").onclick = deleteFunc
+    }
+
+    handler()
+
+    function deleteFunc(event){
+
+        if(event.target.dataset.idDelete){
+            const idToDelete = target.dataset.idDelete
+            tasks = tasks.filter(t=>t.id == idToDelete ? false : true)
+            makeRows()
+        }
+
+    }
+
+</script>

@@ -1,0 +1,10 @@
+body{
+    background-color: yellow;
+}
+
+.info-box{
+    color: aliceblue;
+    background-color: darkslateblue;
+    display: flex;
+}
+
