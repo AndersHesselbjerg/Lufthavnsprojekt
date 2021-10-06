@@ -1,18 +1,7 @@
 package com.example.lufthavnsprojekt.Repositories;
 
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-@Repository
-public interface FlightRepository {
-
-    boolean createFlight(Flight flight);
-    boolean deleteFlight(int index);
-    boolean updateFlight(int index, Flight flight);
-    Flight getFlight(int index);
-    List<Flight> getFlight();
-
-
+public interface FlightRepository<Long, Id> extends CrudRepository<Long, Id> {
 }
