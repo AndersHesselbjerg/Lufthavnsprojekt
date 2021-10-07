@@ -1,0 +1,13 @@
+body{
+    background-color: whitesmoke;
+}
+
+.overskrift{
+    text-align: center;
+}
+
+.info-box{
+    text-decoration-color: black;
+    background-color: whitesmoke;
+    display: flex;
+}

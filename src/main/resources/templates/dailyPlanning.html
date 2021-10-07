@@ -10,14 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
-    <title>AdminView</title>
+    <title>dailyPlanning</title>
 </head>
 <body>
 
 <div data-desktop-id="header" data-js-id="header-container" style="min-height: 44px; max-height: 44px; overflow: hidden;">
 </div>
 
-<h3 class="overskrift"> Drift log</h3>
+<h3 class="overskrift"> Day planning</h3>
 
 
 <div class="header"></div>
@@ -26,12 +26,12 @@
 
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Task</th>
-            <th>Expected Time</th>
-            <th>Real Time</th>
-            <th>Gate ✈</th>
-            <th></th>
+            <th>Date</th>
+            <th>Arrival/Departure</th>
+            <th>RouteNumber</th>
+            <th>STA/STD</th>
+            <th>A/C</th>
+            <th>ORG./Des.</th>
         </tr>
         </thead>
         <tbody class="info-body" id="task-table-body">
@@ -73,28 +73,29 @@
 <script>
 
     let tasks = [
-        {id: 12, Desc: "Cleaning", ExpectedTime: "15 min", RealTime: "17 min", Gate: 4},
-        {id: 13, Desc: "Gas", ExpectedTime: "10 min", RealTime: "9 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4}
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "D8 3563", STAandSTD: "00:10", AC: "73H", origndestination: "KRK"},
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "JTG360", STAandSTD: "00:10", AC: "73H", origndestination: "AHO"},
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "SK 9250", STAandSTD: "00:10", AC: "CR9", origndestination: "ARN"},
+        {Date: "19/9-2019", ArrivalDeparture: "D", RouteNo: "SU 2497", STAandSTD: "00:10", AC: "73H", origndestination: "SVO"},
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "SK 1546", STAandSTD: "00:35", AC: "CR9", origndestination: "MAN"},
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "D8 3733", STAandSTD: "00:40", AC: "73H", origndestination: "FCO"},
+        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "QY 174", STAandSTD: "01:35", AC: "75V", origndestination: "LEJ"},
     ]
 
     function makeRows() {
 
-    const rows = tasks.map(t =>`
+        const rows = tasks.map(t =>`
         <tr>
-            <td>${t.id}</td>
-            <td>${t.Desc}</td>
-            <td>${t.ExpectedTime}</td>
-            <td>${t.RealTime}</td>
-            <td>${t.Gate}</td>
+            <td>${t.Date}</td>
+            <td>${t.ArrivalDeparture}</td>
+            <td>${t.RouteNo}</td>
+            <td>${t.STAandSTD}</td>
+            <td>${t.AC}</td>
+            <td>${t.origndestination}</td>
             <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#task-modal">View Event</button></td>
         </tr>
             `)
-    document.getElementById("task-table-body").innerHTML = rows.join("")
+        document.getElementById("task-table-body").innerHTML = rows.join("")
     }
     makeRows()
 
