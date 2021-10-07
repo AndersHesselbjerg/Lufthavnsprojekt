@@ -1,6 +1,7 @@
 package com.example.lufthavnsprojekt.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -37,21 +38,25 @@ public class Plane {
         @Column(nullable = false)
         private char size;
 
-        @Column(nullable = false)
-        private int gateNo;
+        @JsonBackReference
+        @OneToMany
+        Set<Task> tasks;
 
+        @JsonBackReference
+        @ManyToOne
+        Gate gate;
 
-        public Plane(boolean passengers, int gateNo, boolean isClean, boolean hasGas, Set<Flight> flights, String model, String icao, char size) {
-                this.hasPassengeres = passengers;
+        public Plane(boolean hasPassengeres, boolean isClean, boolean hasGas, String model, Set<Flight> flights, String icao, char size, Set<Task> tasks, Gate gate) {
+                this.hasPassengeres = hasPassengeres;
                 this.isClean = isClean;
                 this.hasGas = hasGas;
                 this.model = model;
                 this.flights = flights;
-                this.Icao = icao;
+                Icao = icao;
                 this.size = size;
-                this.gateNo = gateNo;
+                this.tasks = tasks;
+                this.gate = gate;
         }
-
 
         public Plane() {
         }
@@ -96,14 +101,6 @@ public class Plane {
                 this.size = size;
         }
 
-        public int getGateNo() {
-                return gateNo;
-        }
-
-        public void setGateNo(int gateNo) {
-                this.gateNo = gateNo;
-        }
-
         public String getModel() {
                 return model;
         }
@@ -126,5 +123,29 @@ public class Plane {
 
         public void setIcao(String icao) {
                 Icao = icao;
+        }
+
+        public boolean isClean() {
+                return isClean;
+        }
+
+        public void setClean(boolean clean) {
+                isClean = clean;
+        }
+
+        public Set<Task> getTasks() {
+                return tasks;
+        }
+
+        public void setTasks(Set<Task> tasks) {
+                this.tasks = tasks;
+        }
+
+        public Gate getGate() {
+                return gate;
+        }
+
+        public void setGate(Gate gate) {
+                this.gate = gate;
         }
 }
