@@ -4,12 +4,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/adminView.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
     <title>AdminView</title>
 </head>
 <body>
 
+<div data-desktop-id="header" data-js-id="header-container" style="min-height: 44px; max-height: 44px; overflow: hidden;">
+</div>
+
 <h3 class="overskrift"> Drift log</h3>
+
 
 <div class="header"></div>
 <div class="info-box" style="height: 700px;overflow-y: scroll;">
@@ -25,14 +34,40 @@
             <th></th>
         </tr>
         </thead>
-        <tbody class="info-body" id="user-table-body">
+        <tbody class="info-body" id="task-table-body">
         </tbody>
 
     </table>
 </div>
 <button class="update-button">Update log</button>
 <button class="print-button">Print log</button>
+
+<div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="mb-3" id="input-desc"></div>
+                    <div class="mb-3">
+                        <label for="input-note" class="form-label">Note til task</label>
+                        <input type="text" class="form-control" id="input-note">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
+
 </html>
 
 <script>
@@ -56,10 +91,10 @@
             <td>${t.ExpectedTime}</td>
             <td>${t.RealTime}</td>
             <td>${t.Gate}</td>
-            <td><a data-id-delete=${t.id} href="#">View event</a></td>
+            <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#task-modal">View Event</button></td>
         </tr>
             `)
-    document.getElementById("user-table-body").innerHTML = rows.join("")
+    document.getElementById("task-table-body").innerHTML = rows.join("")
     }
     makeRows()
 
@@ -70,19 +105,16 @@
     }
 
     function handler(){
-        document.getElementById("user-table-body").onclick = deleteFunc
+        document.getElementById("task-table-body").onclick = deleteFunc
     }
 
     handler()
 
-    function deleteFunc(event){
-        const target = event.target;
 
-        if(event.target.dataset.idDelete){
-            const idToDelete = target.dataset.idDelete
-            tasks = tasks.filter(t=>t.id == idToDelete ? false : true)
-            makeRows()
-        }
-
+    function showModal(task) {
+        const myModal = new bootstrap.Modal(document.getElementById('task-modal'))
+        document.getElementById("input-desc").value = task.Desc
+        document.getElementById("input-note").value = "Note"
+        myModal.show()
     }
 </script>
