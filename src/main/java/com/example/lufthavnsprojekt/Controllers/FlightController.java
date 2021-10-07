@@ -1,4 +1,4 @@
 package com.example.lufthavnsprojekt.Controllers;
 
-public class DepartureController {
+public class FlightController {
 }
