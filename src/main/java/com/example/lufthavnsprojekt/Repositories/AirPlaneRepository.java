@@ -1,16 +1,11 @@
 package com.example.lufthavnsprojekt.Repositories;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Id;
 import java.util.List;
 
-@Repository
-public interface AirPlaneRepository{
-
-        boolean createAirplane(AirPlane airPlane);
-        boolean deleteAirplane(int index);
-        boolean updateAirplane(int index, AirPlane airPlane);
-        AirPlane getPlane(int index);
-        List<AirPlane> getAirplane();
+public interface AirPlaneRepository <Long, Id> extends CrudRepository<Long, Id> {
 
 }

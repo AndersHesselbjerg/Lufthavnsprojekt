@@ -1,6 +1,7 @@
 package com.example.lufthavnsprojekt.Repositories;
 
-public interface TaskRepository {
+import org.springframework.data.repository.CrudRepository;
 
+public interface TaskRepository<Long, Id> extends CrudRepository<Long,Id> {
 
 }

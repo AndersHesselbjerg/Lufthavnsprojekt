@@ -1,18 +1,10 @@
 package com.example.lufthavnsprojekt.Repositories;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-import java.time.LocalDate;
-import java.util.List;
-
-
-@Repository
-public interface EmployeeRepository {
-
-    boolean createEmployee(Employee employee);
-    boolean deleteEmployee(int index);
-    boolean updateEmployee(Employee employee);
-    Employee getEmployee(int index);
-
+public interface EmployeeRepository <Long, Id> extends CrudRepository<Long, Id> {
 
 }
+
+
+
