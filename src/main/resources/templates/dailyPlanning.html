@@ -21,7 +21,8 @@
 
 
 <div class="header"></div>
-<div class="info-box" style="height: 700px;overflow-y: scroll;">
+<div class="info-box" style="height: 500px;overflow-y: scroll; max-width: 80%; margin-left: auto; margin-right: auto">
+
     <table class="table">
 
         <thead>
@@ -31,17 +32,28 @@
             <th>Arrival/Departure</th>
             <th>RouteNumber</th>
             <th>Time</th>
-            <th>A/C</th>
+            <th>Plane</th>
             <th>ORG./Des.</th>
+            <th></th>
         </tr>
         </thead>
-        <tbody class="info-body" id="task-table-body">
+        <tbody class="info-body" id="flight-table-body">
         </tbody>
-
     </table>
 </div>
-<button class="update-button">Update log</button>
-<button class="print-button">Print log</button>
+
+<div class="info-box" style="height: 200px; overflow-x: scroll; max-width: 30%; margin-left: auto; margin-right: auto">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Gates available:</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="info-body" id="gate-table-body">
+        </tbody>
+    </table>
+</div>
 
 <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
     <div class="modal-dialog">
@@ -73,25 +85,29 @@
 
 <script>
 
-    let tasks = [
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "D8 3563", STAandSTD: "00:10", AC: "73H", origndestination: "KRK"},
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "JTG360", STAandSTD: "00:10", AC: "73H", origndestination: "AHO"},
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "SK 9250", STAandSTD: "00:10", AC: "CR9", origndestination: "ARN"},
-        {Date: "19/9-2019", ArrivalDeparture: "D", RouteNo: "SU 2497", STAandSTD: "00:10", AC: "73H", origndestination: "SVO"},
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "SK 1546", STAandSTD: "00:35", AC: "CR9", origndestination: "MAN"},
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "D8 3733", STAandSTD: "00:40", AC: "73H", origndestination: "FCO"},
-        {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "QY 174", STAandSTD: "01:35", AC: "75V", origndestination: "LEJ"},
-    ]
-
     let incomingFlights = []
 
-    const URL = "http://localhost:8080/airport/flights"
+    let flightURL = "http://localhost:8080/airport/flights"
     function fetchFlights() {
-        fetch(URL)
+        fetch(flightURL)
             .then(res => res.json())
             .then(data =>{
                 incomingFlights  = data
                 makeFlightRows()
+            }).catch(e => {
+            console.log(e);
+        });
+    }
+
+    let gateStatus = []
+
+    let gateURL = "http://localhost:8080/airport/gates"
+    function fetchGates() {
+        fetch(gateURL)
+            .then(res => res.json())
+            .then(data =>{
+                gateStatus  = data
+                makeGateRows()
             }).catch(e => {
             console.log(e);
         });
@@ -107,32 +123,42 @@
             <td>${t.arrivalDepart}</td>
             <td>${t.routeNo}</td>
             <td>${t.timeOfAD}</td>
-            <td>${t.plane.id}</td>
+            <td>${t.plane.id} ${t.plane.model} size: ${t.plane.size}</td>
             <td>${t.airport.country}</td>
             <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#task-modal">View Event</button></td>
         </tr>
             `)
-        document.getElementById("task-table-body").innerHTML = rows.join("")
+        document.getElementById("flight-table-body").innerHTML = rows.join("")
     }
+
+    function makeGateRows() {
+        const gates = gateStatus;
+        const rows = gates.map(t =>`
+        <tr>
+            <td>${t.gateNo}</td>
+            <td>${t.gateSize}</td>
+        </tr>
+            `)
+        document.getElementById("gate-table-body").innerHTML = rows.join("")
+    }
+    fetchGates()
     fetchFlights()
 
-    const yellowMouseover = document.getElementById("midterHeader")
+    function movePlane(evt){
+    evt.preventDefault()
+    evt.stopPropagation()
+    const target = evt.target;
 
-    yellowMouseover.onmouseover = function(event){
-        event.target.style.color = 'yellow';
     }
 
-    function handler(){
-        document.getElementById("task-table-body").onclick = deleteFunc
+    document.getElementById("").onclick = (e) => {
+        e.preventDefault()
+        //employeeTask.push(flights[0]) skal pushes til employee
+        const target = e.target;
+        target.plane.gateNo = document.getElementById("gateNumber").value
+        incomingFlights.shift()
+        makeFlightRows()
     }
 
-    handler()
 
-
-    function showModal(task) {
-        const myModal = new bootstrap.Modal(document.getElementById('task-modal'))
-        document.getElementById("input-desc").value = task.Desc
-        document.getElementById("input-note").value = "Note"
-        myModal.show()
-    }
 </script>

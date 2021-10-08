@@ -1,9 +1,11 @@
 package com.example.lufthavnsprojekt.Controllers;
 
 import com.example.lufthavnsprojekt.Models.Flight;
+import com.example.lufthavnsprojekt.Models.Gate;
 import com.example.lufthavnsprojekt.Models.Plane;
 import com.example.lufthavnsprojekt.Models.Task;
 import com.example.lufthavnsprojekt.Services.FlightsService;
+import com.example.lufthavnsprojekt.Services.GateService;
 import com.example.lufthavnsprojekt.Services.PlaneService;
 import com.example.lufthavnsprojekt.Services.TaskService;
 import org.springframework.http.HttpStatus;
@@ -22,11 +24,13 @@ public class Controller {
     private PlaneService planeService;
     private TaskService taskService;
     private FlightsService flightsService;
+    private GateService gateService;
 
-    public Controller(PlaneService planeService, TaskService taskService, FlightsService flightsService){
+    public Controller(PlaneService planeService, TaskService taskService, FlightsService flightsService, GateService gateService){
         this.planeService = planeService;
         this.taskService = taskService;
         this.flightsService = flightsService;
+        this.gateService = gateService;
     }
 
 
@@ -43,6 +47,11 @@ public class Controller {
     @GetMapping("/flights")
     public ResponseEntity<List<Flight>> FindAllFlights(){
         return ResponseEntity.status(HttpStatus.OK).body(flightsService.getAllFlights());
+    }
+
+    @GetMapping("/gates")
+    public ResponseEntity<List<Gate>> FindAllGates(){
+        return ResponseEntity.status(HttpStatus.OK).body(gateService.getAllGates());
     }
 /*
     @GetMapping("/planes/{id}")

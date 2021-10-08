@@ -14,7 +14,7 @@ public class Gate {
     @Column(nullable = false)
     private int gateNo;
     @Column(nullable = false)
-    private int gateSize;
+    private char gateSize;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "gate")
@@ -23,7 +23,7 @@ public class Gate {
     public Gate() {
     }
 
-    public Gate(int gateNo, int gateSize, Set<Plane> planes) {
+    public Gate(int gateNo, char gateSize, Set<Plane> planes) {
         this.gateNo = gateNo;
         this.gateSize = gateSize;
         this.planes = planes;
@@ -45,11 +45,11 @@ public class Gate {
         this.gateNo = gateNo;
     }
 
-    public int getGateSize() {
+    public char getGateSize() {
         return gateSize;
     }
 
-    public void setGateSize(int gateSize) {
+    public void setGateSize(char gateSize) {
         this.gateSize = gateSize;
     }
 
