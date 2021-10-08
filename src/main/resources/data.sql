@@ -16,8 +16,9 @@ VALUES
 
 INSERT INTO flight (arrival_depart, date, route_no, time_ofad, airport_id, plane_id)
 VALUES
-('a', '2021-10-07', 101, '10:20:48', 1, 1),
-('d', '2021-10-07', 101, '10:50:30', 2, 1);
+('a', '2021-10-07', 'D8 3563', '10:20:48', 1, 1),
+('d', '2021-10-07', '101', '10:50:30', 2, 1),
+
 
 INSERT INTO employee (title)
 VALUES
