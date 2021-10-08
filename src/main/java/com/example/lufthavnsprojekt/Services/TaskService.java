@@ -1,6 +1,5 @@
 package com.example.lufthavnsprojekt.Services;
 
-import com.example.lufthavnsprojekt.Models.Plane;
 import com.example.lufthavnsprojekt.Models.Task;
 import com.example.lufthavnsprojekt.Repositories.TaskRep;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class TaskService {
         this.taskRep=taskRep;
     }
 
-    public List<Task> getAllPlanes(){
+    public List<Task> getAllTasks(){
         List<Task> allTasks = new ArrayList<>();
         taskRep.findAll().forEach(allTasks::add);
         return allTasks;

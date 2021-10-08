@@ -1,13 +1,24 @@
+INSERT INTO gate (gate_no, gate_size)
+VALUES
+    (1, 's'),
+    (2, 's'),
+    (3, 's'),
+    (4, 'm'),
+    (5, 'm'),
+    (6, 'm'),
+    (7, 'l'),
+    (8, 'l');
+
 INSERT INTO planes (icao, is_clean, has_gas, model, has_passengeres, size, gate_id)
 VALUES
-('F100', false, false, 'Fokker 100', true, 'm', null),
-('B461', false, false, 'BAe 146-100 Pax', true, 'm', null),
-('B462', false, false, 'BAe 146-200 Pax', true, 'm', null),
-('B463', false, false, 'BAe 146-300 Pax', true, 'm', null),
-('B461', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null),
-('B462', false, false, 'BAe 146 Freighter (-200QT & QC)', true, 'm', null),
-('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null),
-('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null);
+('F100', false, false, 'Fokker 100', true, 'm', 1),
+('B461', false, false, 'BAe 146-100 Pax', true, 'm', 5),
+('B462', false, false, 'BAe 146-200 Pax', true, 'm', 3),
+('B463', false, false, 'BAe 146-300 Pax', true, 'm', 7),
+('B461', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', 4),
+('B462', false, false, 'BAe 146 Freighter (-200QT & QC)', true, 'm', 8),
+('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', 4),
+('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', 2);
 
 INSERT INTO airport(country)
 VALUES
@@ -45,19 +56,8 @@ VALUES
 ('Taxi'),
 ('Gas');
 
-INSERT INTO task (description, exp_time, real_time, employee_id, plane_id)
+INSERT INTO task (description, exp_time, real_time, employee_id, plane_id, distance_to_gate)
 VALUES
-('Cleaning done', 15, 18, 1, 1),
-('Filled with gas', 10, 12, 3, 1),
-('Passengers gathered', 20, 18, 2, 1);
-
-INSERT INTO gate (gate_no, gate_size)
-VALUES
-(1, 's'),
-(2, 's'),
-(3, 's'),
-(4, 'm'),
-(5, 'm'),
-(6, 'm'),
-(7, 'l'),
-(8, 'l');
+('Cleaning done', 15, 18, 1, 1, 30 ),
+('Filled with gas', 10, 12, 3, 1, 35),
+('Passengers gathered', 20, 18, 2, 1, 27);

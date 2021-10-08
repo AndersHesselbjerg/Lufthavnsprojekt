@@ -17,6 +17,8 @@ public class Task {
 
     private int realTime;
 
+    private int distanceToGate;
+
     @JsonManagedReference
     @ManyToOne
     Plane plane;
@@ -28,12 +30,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(String description, int expTime, int realTime, Plane plane, Employee employee) {
+    public Task(String description, int expTime, int realTime, Plane plane, Employee employee, int distanceToGate) {
         this.description = description;
         this.expTime = expTime;
         this.realTime = realTime;
         this.plane = plane;
         this.employee = employee;
+        this.distanceToGate = distanceToGate;
     }
 
     public Long getId() {
@@ -82,5 +85,13 @@ public class Task {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public int getDistanceToGate() {
+        return distanceToGate;
+    }
+
+    public void setDistanceToGate(int distanceToGate) {
+        this.distanceToGate = distanceToGate;
     }
 }

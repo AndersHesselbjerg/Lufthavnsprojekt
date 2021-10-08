@@ -41,7 +41,7 @@ public class Controller {
 
     @GetMapping("/tasks")
     public ResponseEntity<List<Task>> findAllTasks(){
-        return ResponseEntity.status(HttpStatus.OK).body(taskService.getAllPlanes());
+        return ResponseEntity.status(HttpStatus.OK).body(taskService.getAllTasks());
     }
 
     @GetMapping("/flights")
@@ -52,6 +52,11 @@ public class Controller {
     @GetMapping("/gates")
     public ResponseEntity<List<Gate>> FindAllGates(){
         return ResponseEntity.status(HttpStatus.OK).body(gateService.getAllGates());
+    }
+
+    @GetMapping("/your-tasks")
+    public ResponseEntity<List<Task>> FindAllTasks(){
+        return ResponseEntity.status(HttpStatus.OK).body(taskService.getAllTasks());
     }
 /*
     @GetMapping("/planes/{id}")

@@ -1,0 +1,43 @@
+.navBar{
+    min-height: 44px;
+    max-height: 44px;
+    overflow: visible;
+    background-color: cornflowerblue;
+}
+
+.navBar-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.user-icon {
+    height: 32px;
+    width: 32px;
+    margin-right: 6px;
+    margin-top: 6px;
+}
+
+.title{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 44px;
+    color: white;
+}
+
+.btn-start{
+    background-color: green;
+    color: white;
+}
+
+.btn-end{
+    background-color: red;
+    color: white;
+}
+
+.task-wrapper{
+    justify-content: center;
+    display: flex;
+    height: 300px;
+    overflow-y: scroll;
+}
