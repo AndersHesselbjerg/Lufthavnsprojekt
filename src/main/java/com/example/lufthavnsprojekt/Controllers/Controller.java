@@ -29,6 +29,7 @@ public class Controller {
         this.flightsService = flightsService;
     }
 
+
     @GetMapping("/planes")
     public ResponseEntity<List<Plane>> findAllPlanes(){
         return ResponseEntity.status(HttpStatus.OK).body(planeService.getAllPlanes());

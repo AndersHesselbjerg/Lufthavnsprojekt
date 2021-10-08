@@ -31,7 +31,7 @@ public class PlaneService {
         return allPlanes;
     }
 
-    /*
+/*
     public void makePlane(boolean passengers, boolean isClean, boolean hasGas, Set<Flight> flights, String model, String icao, char size, int gateNo){
         Plane tmp = new Plane(passengers, gateNo, isClean,  hasGas, flights, model, icao, size);
         planeRep.save(tmp);
@@ -41,7 +41,7 @@ public class PlaneService {
         planeRep.save(tmp);
     }
 }
- */
 
+*/
 
 }

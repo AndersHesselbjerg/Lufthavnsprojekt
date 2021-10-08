@@ -1,8 +1,13 @@
 INSERT INTO planes (icao, is_clean, has_gas, model, has_passengeres, size, gate_id)
 VALUES
 ('F100', false, false, 'Fokker 100', true, 'm', null),
-('B302', false, false, 'Fastplane', true, 's', null),
-('E232', false, false, 'Slowplane', true, 'l', null);
+('B461', false, false, 'BAe 146-100 Pax', true, 'm', null),
+('B462', false, false, 'BAe 146-200 Pax', true, 'm', null),
+('B463', false, false, 'BAe 146-300 Pax', true, 'm', null),
+('B461', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null),
+('B462', false, false, 'BAe 146 Freighter (-200QT & QC)', true, 'm', null),
+('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null),
+('B463', false, false, 'BAe 146 Freighter (-100QT & QC)', true, 'm', null);
 
 INSERT INTO airport(country)
 VALUES
