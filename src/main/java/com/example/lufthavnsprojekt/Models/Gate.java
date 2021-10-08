@@ -17,7 +17,7 @@ public class Gate {
     private int gateSize;
 
     @JsonManagedReference
-    @OneToMany
+    @OneToMany(mappedBy = "gate")
     Set<Plane> planes;
 
     public Gate() {

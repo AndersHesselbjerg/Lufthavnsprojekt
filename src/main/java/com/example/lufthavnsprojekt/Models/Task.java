@@ -21,7 +21,7 @@ public class Task {
     @ManyToOne
     Plane plane;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     Employee employee;
 

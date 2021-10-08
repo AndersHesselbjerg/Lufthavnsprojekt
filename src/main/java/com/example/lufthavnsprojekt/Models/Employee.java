@@ -1,5 +1,6 @@
 package com.example.lufthavnsprojekt.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -13,8 +14,8 @@ public class Employee {
 
     private String title;
 
-    @JsonManagedReference
-    @OneToMany
+    @JsonBackReference
+    @OneToMany(mappedBy = "employee")
     Set<Task> tasks;
 
     public Employee() {

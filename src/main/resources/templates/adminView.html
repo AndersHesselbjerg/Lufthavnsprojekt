@@ -13,7 +13,6 @@
     <title>AdminView</title>
 </head>
 <body>
-
 <div data-desktop-id="header" data-js-id="header-container" style="min-height: 44px; max-height: 44px; overflow: hidden;">
 </div>
 
@@ -21,7 +20,7 @@
 
 
 <div class="header"></div>
-<div class="info-box" style="height: 700px;overflow-y: scroll;">
+<div class="info-box" style="height: 700px;overflow-y: scroll; max-width: 80%; margin-left: auto; margin-right: auto">
     <table class="table">
 
         <thead>
@@ -31,6 +30,7 @@
             <th>Expected Time</th>
             <th>Real Time</th>
             <th>Gate ✈</th>
+            <th></th>
             <th></th>
         </tr>
         </thead>
@@ -65,38 +65,40 @@
         </div>
     </div>
 </div>
-</body>
-
-
-</html>
-
 <script>
 
-    let tasks = [
-        {id: 12, Desc: "Cleaning", ExpectedTime: "15 min", RealTime: "17 min", Gate: 4},
-        {id: 13, Desc: "Gas", ExpectedTime: "10 min", RealTime: "9 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4},
-        {id: 14, Desc: "Getting passagers out", ExpectedTime: "25 min", RealTime: "37 min", Gate: 4}
-    ]
+    let tasksDone = []
 
-    function makeRows() {
+    const URL = "http://localhost:8080/airport/tasks"
+    function fetchTasks() {
+        fetch(URL)
+            .then(res => res.json())
+            .then(data =>{
+                tasksDone  = data
+                makeTaskRows()
+            }).catch(e => {
+            console.log(e);
+        });
+    }
 
-    const rows = tasks.map(t =>`
+
+    function makeTaskRows() {
+        const completedTasks = tasksDone;
+        const rows = completedTasks.map(t =>`
         <tr>
             <td>${t.id}</td>
-            <td>${t.Desc}</td>
-            <td>${t.ExpectedTime}</td>
-            <td>${t.RealTime}</td>
-            <td>${t.Gate}</td>
+            <td>${t.description}</td>
+            <td>${t.expTime}</td>
+            <td>${t.realTime}</td>
+            <td>${t.plane.id}</td>
+            <td>${t.employee.title}</td>
             <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#task-modal">View Event</button></td>
         </tr>
             `)
-    document.getElementById("task-table-body").innerHTML = rows.join("")
+        document.getElementById("task-table-body").innerHTML = rows.join("")
     }
-    makeRows()
+
+    fetchTasks()
 
     const yellowMouseover = document.getElementById("midterHeader")
 
@@ -107,9 +109,7 @@
     function handler(){
         document.getElementById("task-table-body").onclick = deleteFunc
     }
-
     handler()
-
 
     function showModal(task) {
         const myModal = new bootstrap.Modal(document.getElementById('task-modal'))
@@ -118,3 +118,7 @@
         myModal.show()
     }
 </script>
+</body>
+
+
+</html>

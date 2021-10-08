@@ -26,10 +26,11 @@
 
         <thead>
         <tr>
+            <th>ID</th>
             <th>Date</th>
             <th>Arrival/Departure</th>
             <th>RouteNumber</th>
-            <th>STA/STD</th>
+            <th>Time</th>
             <th>A/C</th>
             <th>ORG./Des.</th>
         </tr>
@@ -82,22 +83,38 @@
         {Date: "19/9-2019", ArrivalDeparture: "A", RouteNo: "QY 174", STAandSTD: "01:35", AC: "75V", origndestination: "LEJ"},
     ]
 
-    function makeRows() {
+    let incomingFlights = []
 
-        const rows = tasks.map(t =>`
+    const URL = "http://localhost:8080/airport/flights"
+    function fetchFlights() {
+        fetch(URL)
+            .then(res => res.json())
+            .then(data =>{
+                incomingFlights  = data
+                makeFlightRows()
+            }).catch(e => {
+            console.log(e);
+        });
+    }
+
+
+    function makeFlightRows() {
+        const flights = incomingFlights;
+        const rows = flights.map(t =>`
         <tr>
-            <td>${t.Date}</td>
-            <td>${t.ArrivalDeparture}</td>
-            <td>${t.RouteNo}</td>
-            <td>${t.STAandSTD}</td>
-            <td>${t.AC}</td>
-            <td>${t.origndestination}</td>
+            <td>${t.id}</td>
+            <td>${t.date}</td>
+            <td>${t.arrivalDepart}</td>
+            <td>${t.routeNo}</td>
+            <td>${t.timeOfAD}</td>
+            <td>${t.plane.id}</td>
+            <td>${t.airport.country}</td>
             <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#task-modal">View Event</button></td>
         </tr>
             `)
         document.getElementById("task-table-body").innerHTML = rows.join("")
     }
-    makeRows()
+    fetchFlights()
 
     const yellowMouseover = document.getElementById("midterHeader")
 

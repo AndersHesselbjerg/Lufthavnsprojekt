@@ -22,6 +22,11 @@ public class Airport {
     public Airport() {
     }
 
+    public Airport(String country, Set<Flight> flights) {
+        this.country = country;
+        this.flights = flights;
+    }
+
     public Airport(String country) {
         this.country = country;
     }

@@ -28,7 +28,7 @@ public class Plane {
         private String model;
 
         @JsonBackReference
-        @OneToMany()
+        @OneToMany
         @JoinColumn(name = "iata_code")
         Set<Flight> flights;
 
@@ -39,7 +39,7 @@ public class Plane {
         private char size;
 
         @JsonBackReference
-        @OneToMany
+        @OneToMany(mappedBy = "plane")
         Set<Task> tasks;
 
         @JsonBackReference
